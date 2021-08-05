@@ -50,4 +50,4 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: app/build/outputs/apk/debug/app-debug.apk
           asset_name: MessagingForwarder.apk
-          asset_content_type: application/zip
+          asset_content_type: application/apk
