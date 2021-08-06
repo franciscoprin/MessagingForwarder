@@ -38,11 +38,8 @@ public class IncomingMessageReceiver extends BroadcastReceiver {
         }
         SmsMessage[] messages = Telephony.Sms.Intents.getMessagesFromIntent(intent);
         for (SmsMessage message : messages) {
-            // if (PhoneNumberUtils.compare(message.getDisplayOriginatingAddress(), phone_number)) {
-            // }
             String msg = message.getDisplayMessageBody();
-            Log.i(TAG, "Starting forwarding of message from " + phone_number);
-            new Thread(new HttpPostThread(target_url, msg)).start();
+            new Thread(new HttpPostThread(target_url, msg, phone_number)).start();
         }
     }
 }
