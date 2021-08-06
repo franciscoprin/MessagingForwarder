@@ -7,7 +7,7 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
       - name: Build the app
-        run: ./gradlew clean build --no-build-cache
+        run: gradle clean build --no-build-cache
       - name: Upload Debug APK
         id: upload_release-asset
         uses: actions/upload-release-asset@v1
