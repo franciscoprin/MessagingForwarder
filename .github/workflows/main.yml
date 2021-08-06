@@ -13,14 +13,10 @@ jobs:
       - name: Get release
         id: get_release
         uses: bruceadams/get-release@v1.2.2
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
 
       - name: Upload Debug APK
         id: upload_release-asset
         uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.get_release.outputs.upload_url }}
           upload_url: ${{ github.event.release.upload_url }}
