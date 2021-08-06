@@ -6,15 +6,24 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
+
       - name: Build the app
         run: gradle clean build --no-build-cache
+
+      - name: Get release
+        id: get_release
+        uses: bruceadams/get-release@v1.2.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
       - name: Upload Debug APK
         id: upload_release-asset
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         with:
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
           upload_url: ${{ github.event.release.upload_url }}
           asset_path: ./app/build/outputs/apk/debug/MessagingForwarder-1.1.apk
-          asset_name: MessagingForwarder.apk
+          asset_name: MessagingForwarder-1.1.apk
           asset_content_type: application/zip
