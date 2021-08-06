@@ -14,16 +14,16 @@ jobs:
       - name: Build the app
         run: gradle clean build --no-build-cache
 
-      - name: Get release
-        id: get_release
-        uses: bruceadams/get-release@v1.2.2
+      # - name: Get release
+      #   id: get_release
+      #   uses: bruceadams/get-release@v1.2.2
 
-      - name: Upload Debug APK
-        id: upload_release-asset
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.get_release.outputs.upload_url }}
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./app/build/outputs/apk/debug/MessagingForwarder-1.1.apk
-          asset_name: MessagingForwarder-1.1.apk
-          asset_content_type: application/zip
+      # - name: Upload Debug APK
+      #   id: upload_release-asset
+      #   uses: actions/upload-release-asset@v1
+      #   with:
+      #     upload_url: ${{ steps.get_release.outputs.upload_url }}
+      #     upload_url: ${{ github.event.release.upload_url }}
+      #     asset_path: ./app/build/outputs/apk/debug/MessagingForwarder-1.1.apk
+      #     asset_name: MessagingForwarder-1.1.apk
+      #     asset_content_type: application/zip
