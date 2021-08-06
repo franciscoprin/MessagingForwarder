@@ -14,9 +14,11 @@ jobs:
       - name: Build the app
         run: gradle clean build --no-build-cache
 
-      # - name: Get release
-      #   id: get_release
-      #   uses: bruceadams/get-release@v1.2.2
+      - name: Get release
+        id: get_release
+        uses: bruceadams/get-release@v1.2.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
 
       # - name: Upload Debug APK
       #   id: upload_release-asset
