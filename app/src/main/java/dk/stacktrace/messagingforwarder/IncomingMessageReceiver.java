@@ -38,10 +38,10 @@ public class IncomingMessageReceiver extends BroadcastReceiver {
             Log.w(TAG, "Password to auth with service not set. Will not forward any messages");
             return;
         }
-        if (!preferences.getBoolean("enable", false)) {
-            Log.w(TAG, "Messaging Forwarding was disable");
-            return;
-        }
+        // if (!preferences.getBoolean("enable", false)) {
+        //     Log.w(TAG, "Messaging Forwarding was disable");
+        //     return;
+        // }
 
         // Getting shared variables:
         String refreshToken = null;
