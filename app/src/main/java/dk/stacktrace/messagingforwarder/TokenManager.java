@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.MalformedURLException;
+import org.json.simple.JSONObject;
 
 public class TokenManager {
     private static final String TAG = HttpPostThread.class.getName();
@@ -62,6 +64,7 @@ public class TokenManager {
                 // Response:
                 response = out.getResponseMessage();
                 accessToken = response.get("access");
+                int status = connection.getResponseCode();
                 Log.i(TAG, "Server replied with HTTP status: " + status);
                 out.close();
             }
