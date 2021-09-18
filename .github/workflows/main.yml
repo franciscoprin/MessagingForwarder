@@ -11,11 +11,11 @@ jobs:
       - name: Checkout The Code
         uses: actions/checkout@v2
 
-      - name: Build The APP
-        run: gradle clean build --no-build-cache
-
       - name: Get gradle version
         run: gradle --version
+
+      - name: Build The APP
+        run: gradle clean build --no-build-cache
 
       - name: Get Release
         id: get_release
