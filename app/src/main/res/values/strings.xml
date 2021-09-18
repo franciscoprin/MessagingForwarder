@@ -4,6 +4,16 @@
     <string name="pref_phoneNumber">Phone number</string>
     <string name="pref_targetURL_description">The URL to forward messages to</string>
     <string name="pref_targetURL">Target URL</string>
+
+    <string name="pref_refreshToken_description">The token that is used to get the access token</string>
+    <string name="pref_refreshToken">Refresh Token</string>
+
+    <string name="pref_servicePassword_description">The password used to get the refresh token</string>
+    <string name="pref_servicePassword">Service Password</string>
+
+    <string name="pref_serviceUsername_description">The user used to get the refresh token</string>
+    <string name="pref_serviceUsername">Service User</string>
+
     <string name="pref_settings_title">Preferences</string>
     <string name="pref_about">About</string>
     <string name="about_title">License</string>

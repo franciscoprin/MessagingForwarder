@@ -10,7 +10,7 @@
             android:key="service_username"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:summary="@string/pref_serviceUsername_DESCRIPTION"
+            android:summary="@string/pref_serviceUsername_description"
             android:title="@string/pref_serviceUsername" />
         <EditTextPreference
             android:inputType="textPassword"
