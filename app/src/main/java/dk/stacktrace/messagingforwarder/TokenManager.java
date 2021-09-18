@@ -37,7 +37,7 @@ public class TokenManager {
       }
     }
 
-    private JSONObject getResponse(HttpURLConnection conn) throws IOException {
+    private JSONObject getResponse(HttpURLConnection conn) throws IOException, JSONException {
         InputStreamReader in = new InputStreamReader((InputStream) conn.getContent());
         BufferedReader buff = new BufferedReader(in);
         String line;
@@ -47,12 +47,7 @@ public class TokenManager {
             builder.append(line).append("\n");
         } while (line != null);
         buff.close();
-        try {
-            return new JSONObject(builder.toString());
-        }
-        catch (JSONException e) {
-            return null;
-        }
+        return new JSONObject(builder.toString());
     }
 
 
@@ -86,9 +81,12 @@ public class TokenManager {
                 out.flush();
 
                 // Response:
-                response = this.getResponse(connection);
-                if (response != null){
-                    accessToken = response.getString("access", null);
+                try {
+                    response = this.getResponse(connection);
+                    accessToken = response.getString("access");
+                }
+                catch (JSONException e) {
+                    Log.i(TAG, "Json Error");
                 }
                 int status = connection.getResponseCode();
                 Log.i(TAG, "Server replied with HTTP status: " + status);
@@ -134,10 +132,13 @@ public class TokenManager {
                     out.flush();
 
                     // Response:
-                    response = this.getResponse(connection);
-                    if (response != null){
+                    try {
+                        response = this.getResponse(connection);
                         accessToken = response.getString("access", null);
                         this.refreshToken = response.getString("refresh", null);
+                    }
+                    catch (JSONException e) {
+                        Log.i(TAG, "Json Error");
                     }
                     out.close();
                 }
