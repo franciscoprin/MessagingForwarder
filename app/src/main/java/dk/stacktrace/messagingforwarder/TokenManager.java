@@ -88,7 +88,7 @@ public class TokenManager {
                 // Response:
                 response = this.getResponse(connection);
                 if (response != null){
-                    accessToken = response.getString("access");
+                    accessToken = response.getString("access", null);
                 }
                 int status = connection.getResponseCode();
                 Log.i(TAG, "Server replied with HTTP status: " + status);
@@ -136,8 +136,8 @@ public class TokenManager {
                     // Response:
                     response = this.getResponse(connection);
                     if (response != null){
-                        accessToken = response.getString("access");
-                        this.refreshToken = response.getString("refresh");
+                        accessToken = response.getString("access", null);
+                        this.refreshToken = response.getString("refresh", null);
                     }
                     out.close();
                 }
