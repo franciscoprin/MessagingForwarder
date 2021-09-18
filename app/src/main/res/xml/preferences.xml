@@ -24,7 +24,7 @@
             android:key="refresh_token"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:enabled="false"
+            android:enabled="true"
             android:summary="@string/pref_refreshToken_description"
             android:title="@string/pref_refreshToken" />
         <EditTextPreference
