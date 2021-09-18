@@ -44,13 +44,14 @@ public class IncomingMessageReceiver extends BroadcastReceiver {
         // }
 
         // Getting shared variables:
+        String accessToken = null;
         String refreshToken = null;
         String newRefreshToken = null;
         TokenManager tokenManager = null;
         String[] arg = new String[2];
         String msg = null;
-        boolean username = preferences.getString("service_username", null);
-        boolean password = preferences.getString("service_password", null);
+        String username = preferences.getString("service_username", null);
+        String password = preferences.getString("service_password", null);
         String baseURL = preferences.getString("target_URL", "");
         String phone_number = preferences.getString("phone_number", "");
 

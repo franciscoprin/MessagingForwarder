@@ -8,10 +8,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class TokenManager {
-    private final String baseURL;
-    private final String username;
-    private final String password;
-    private final String refreshToken;
+    private static final String TAG = HttpPostThread.class.getName();
+    private String baseURL;
+    private String username;
+    private String password;
+    private String refreshToken;
 
     public TokenManager(String baseURL, String username, String password, String refreshToken) {
         this.baseURL = baseURL;
