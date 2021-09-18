@@ -43,7 +43,7 @@ public class TokenManager {
         }
 
         try {
-            connection = (HttpURLConnection)url.openConnection();
+            connection = (HttpURLConnection) url.openConnection();
             connection.setDoOutput(true);
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
@@ -62,7 +62,7 @@ public class TokenManager {
                 out.flush();
 
                 // Response:
-                response = out.getResponseMessage();
+                response = connection.getResponseMessage();
                 accessToken = response.get("access");
                 int status = connection.getResponseCode();
                 Log.i(TAG, "Server replied with HTTP status: " + status);
@@ -108,7 +108,7 @@ public class TokenManager {
                     out.flush();
 
                     // Response:
-                    response = out.getResponseMessage();
+                    response = connection.getResponseMessage();
                     this.refreshToken = response.get("refresh");
                     accessToken = response.get("access");
                     out.close();
