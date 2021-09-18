@@ -7,7 +7,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.MalformedURLException;
-import org.json.simple.JSONObject;
+// import org.json.simple.JSONObject;
+import org.json.JSONArray;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -126,8 +127,8 @@ public class TokenManager {
 
                     // Response:
                     response = this.getResponse(connection);
-                    this.refreshToken = response.get("refresh");
-                    accessToken = response.get("access");
+                    this.refreshToken = response.getString("refresh");
+                    accessToken = response.getString("access");
                     out.close();
                 }
             }
