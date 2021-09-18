@@ -8,6 +8,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.MalformedURLException;
 import org.json.simple.JSONObject;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class TokenManager {
     private static final String TAG = HttpPostThread.class.getName();
@@ -31,6 +33,20 @@ public class TokenManager {
           return null;
       }
     }
+
+    private JSONObject getResponse(HttpURLConnection conn) throws IOException {
+        InputStreamReader in = new InputStreamReader((InputStream) conn.getContent());
+        BufferedReader buff = new BufferedReader(in);
+        String line;
+        StringBuilder builder = new StringBuilder();
+        do {
+            line = buff.readLine();
+            builder.append(line).append("\n");
+        } while (line != null);
+        buff.close();
+        return new JSONObject(builder.toString());
+    }
+
 
     private String refresh_token() {
         URL url = this.get_url("/api/token/refresh/");
@@ -62,8 +78,8 @@ public class TokenManager {
                 out.flush();
 
                 // Response:
-                response = connection.getResponseMessage();
-                accessToken = response.get("access");
+                response = this.getResponse(connection);
+                accessToken = response.getString("access");
                 int status = connection.getResponseCode();
                 Log.i(TAG, "Server replied with HTTP status: " + status);
                 out.close();
@@ -108,7 +124,7 @@ public class TokenManager {
                     out.flush();
 
                     // Response:
-                    response = connection.getResponseMessage();
+                    response = this.getResponse(connection);
                     this.refreshToken = response.get("refresh");
                     accessToken = response.get("access");
                     out.close();
