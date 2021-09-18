@@ -9,6 +9,7 @@ import java.net.URL;
 import java.net.MalformedURLException;
 import org.json.simple.JSONObject;
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class TokenManager {
