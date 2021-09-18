@@ -37,7 +37,7 @@ public class TokenManager {
       }
     }
 
-    private JSONObject getResponse(HttpURLConnection conn) throws IOException, JSONException {
+    private JSONObject getResponse(HttpURLConnection conn) throws IOException {
         InputStreamReader in = new InputStreamReader((InputStream) conn.getContent());
         BufferedReader buff = new BufferedReader(in);
         String line;
@@ -47,7 +47,12 @@ public class TokenManager {
             builder.append(line).append("\n");
         } while (line != null);
         buff.close();
-        return new JSONObject(builder.toString());
+        try {
+            return new JSONObject(builder.toString());
+        }
+        catch (JSONException e) {
+            return null;
+        }
     }
 
 
@@ -82,7 +87,9 @@ public class TokenManager {
 
                 // Response:
                 response = this.getResponse(connection);
-                accessToken = response.getString("access");
+                if (response != null){
+                    accessToken = response.getString("access");
+                }
                 int status = connection.getResponseCode();
                 Log.i(TAG, "Server replied with HTTP status: " + status);
                 out.close();
@@ -128,8 +135,10 @@ public class TokenManager {
 
                     // Response:
                     response = this.getResponse(connection);
-                    this.refreshToken = response.getString("refresh");
-                    accessToken = response.getString("access");
+                    if (response != null){
+                        accessToken = response.getString("access");
+                        this.refreshToken = response.getString("refresh");
+                    }
                     out.close();
                 }
             }
