@@ -14,6 +14,9 @@ jobs:
       - name: Build The APP
         run: gradle clean build --no-build-cache
 
+      - name: Get gradle version
+        run: gradle --version
+
       - name: Get Release
         id: get_release
         uses: bruceadams/get-release@v1.2.2
