@@ -134,8 +134,8 @@ public class TokenManager {
                     // Response:
                     try {
                         response = this.getResponse(connection);
-                        accessToken = response.getString("access", null);
-                        this.refreshToken = response.getString("refresh", null);
+                        accessToken = response.getString("access");
+                        this.refreshToken = response.getString("refresh");
                     }
                     catch (JSONException e) {
                         Log.i(TAG, "Json Error");
