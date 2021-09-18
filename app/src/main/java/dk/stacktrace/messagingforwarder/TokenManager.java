@@ -30,13 +30,13 @@ public class TokenManager {
     }
 
     private String refresh_token() {
-        URL url = this.get_url('/api/token/refresh/');
+        URL url = this.get_url("/api/token/refresh/");
         HttpURLConnection connection = null;
         String accessToken = null;
         JSONObject response = null;
 
         if (this.refreshToken == null){
-            return null
+            return null;
         }
 
         try {
@@ -49,7 +49,7 @@ public class TokenManager {
 
             String jsonInputString = String.format(
                 "{\"refresh\": \"%s\"}",
-                this.refreshToken,
+                this.refreshToken
             );
 
             try(OutputStream out = connection.getOutputStream()) {
@@ -78,7 +78,7 @@ public class TokenManager {
 
     public String[] get_tokens() {
         String[] arg = new String[2];
-        URL url = this.get_url('api/token/');
+        URL url = this.get_url("api/token/");
         HttpURLConnection connection = null;
         String accessToken = this.refresh_token();
         JSONObject response = null;
