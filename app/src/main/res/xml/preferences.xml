@@ -6,7 +6,29 @@
         android:title="@string/pref_settings_title"
         android:key="pref_settings">
         <EditTextPreference
-            android:inputType="phone"
+            android:inputType="textPersonName"
+            android:key="service_username"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="@string/pref_serviceUsername_DESCRIPTION"
+            android:title="@string/pref_serviceUsername" />
+        <EditTextPreference
+            android:inputType="textPassword"
+            android:key="service_password"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="@string/pref_servicePassword_description"
+            android:title="@string/pref_servicePassword" />
+        <EditTextPreference
+            android:inputType="text"
+            android:key="refresh_token"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:enabled="false"
+            android:summary="@string/pref_refreshToken_description"
+            android:title="@string/pref_refreshToken" />
+        <EditTextPreference
+            android:inputType="text"
             android:key="phone_number"
             android:selectAllOnFocus="true"
             android:singleLine="true"
@@ -19,6 +41,9 @@
             android:singleLine="true"
             android:summary="@string/pref_targetURL_description"
             android:title="@string/pref_targetURL" />
+        <CheckBoxPreference
+            android:key="enable"
+            android:title="@string/enable" />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/pref_about">
