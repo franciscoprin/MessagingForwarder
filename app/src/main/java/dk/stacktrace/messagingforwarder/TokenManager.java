@@ -36,7 +36,7 @@ public class TokenManager {
       }
     }
 
-    private JSONObject getResponse(HttpURLConnection conn) throws IOException {
+    private JSONObject getResponse(HttpURLConnection conn) throws IOException, JSONException {
         InputStreamReader in = new InputStreamReader((InputStream) conn.getContent());
         BufferedReader buff = new BufferedReader(in);
         String line;
