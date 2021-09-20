@@ -32,7 +32,7 @@ public class TokenManager {
       try {
           return new URL(this.baseURL + path);
       } catch (MalformedURLException e) {
-          Log.w(TAG, "Unable to parse URL: " + e.getMessage());
+          Log.w(TAG, "[MessageForwarder] Unable to parse URL: " + e.getMessage());
           return null;
       }
     }
@@ -84,17 +84,18 @@ public class TokenManager {
                 try {
                     response = this.getResponse(connection);
                     accessToken = response.getString("access");
+                    Log.i(TAG, "[MessageForwarder] accessToken: " + accessToken);
                 }
                 catch (JSONException e) {
-                    Log.i(TAG, "Json Error");
+                    Log.i(TAG, "[MessageForwarder] Json Error", e);
                 }
                 int status = connection.getResponseCode();
-                Log.i(TAG, "Server replied with HTTP status: " + status);
+                Log.i(TAG, "[MessageForwarder] Server replied with HTTP status: " + status);
                 out.close();
             }
         }
         catch (IOException e) {
-            Log.w(TAG, "Error communicating with HTTP server", e);
+            Log.w(TAG, "[MessageForwarder] Error communicating with HTTP server", e);
         }
         finally {
             if (connection != null) {
@@ -136,15 +137,17 @@ public class TokenManager {
                         response = this.getResponse(connection);
                         accessToken = response.getString("access");
                         this.refreshToken = response.getString("refresh");
+                        Log.w(TAG, "[MessageForwarder] refreshToken: " + this.refreshToken);
+                        Log.w(TAG, "[MessageForwarder] accessToken: " + this.accessToken);
                     }
                     catch (JSONException e) {
-                        Log.i(TAG, "Json Error");
+                        Log.i(TAG, "[MessageForwarder] Json Error", e);
                     }
                     out.close();
                 }
             }
             catch (IOException e) {
-                Log.w(TAG, "Error communicating with HTTP server", e);
+                Log.w(TAG, "[MessageForwarder] Error communicating with HTTP server", e);
             }
             finally {
                 if (connection != null) {

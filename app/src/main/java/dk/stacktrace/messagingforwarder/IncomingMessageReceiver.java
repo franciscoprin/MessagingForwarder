@@ -18,24 +18,24 @@ public class IncomingMessageReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i(TAG, "Handling message for forwarding");
+        Log.i(TAG, "[MessageForwarder] Handling message for forwarding");
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
 
         // VALIDATIONS:
         if (!preferences.contains("phone_number")) {
-            Log.w(TAG, "Phone number to forward from not set. Will not forward any messages");
+            Log.w(TAG, "[MessageForwarder] Phone number to forward from not set. Will not forward any messages");
             return;
         }
         if (!preferences.contains("target_URL")) {
-            Log.w(TAG, "URL to forward to not set. Will not forward any messages");
+            Log.w(TAG, "[MessageForwarder] URL to forward to not set. Will not forward any messages");
             return;
         }
         if (!preferences.contains("service_username")) {
-            Log.w(TAG, "Username to auth with service not set. Will not forward any messages");
+            Log.w(TAG, "[MessageForwarder] Username to auth with service not set. Will not forward any messages");
             return;
         }
         if (!preferences.contains("service_password")) {
-            Log.w(TAG, "Password to auth with service not set. Will not forward any messages");
+            Log.w(TAG, "[MessageForwarder] Password to auth with service not set. Will not forward any messages");
             return;
         }
         // if (!preferences.getBoolean("enable", false)) {
@@ -60,7 +60,7 @@ public class IncomingMessageReceiver extends BroadcastReceiver {
         try {
             target_url = new URL(preferences.getString("target_URL", "") + "/tmd/message/");
         } catch (MalformedURLException e) {
-            Log.w(TAG, "Unable to parse URL: " + e.getMessage());
+            Log.w(TAG, "[MessageForwarder] Unable to parse URL: " + e.getMessage());
             return;
         }
 
