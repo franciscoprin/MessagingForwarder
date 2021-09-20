@@ -137,8 +137,8 @@ public class TokenManager {
                         response = this.getResponse(connection);
                         accessToken = response.getString("access");
                         this.refreshToken = response.getString("refresh");
+                        Log.w(TAG, "[MessageForwarder] accessToken: " + accessToken);
                         Log.w(TAG, "[MessageForwarder] refreshToken: " + this.refreshToken);
-                        Log.w(TAG, "[MessageForwarder] accessToken: " + this.accessToken);
                     }
                     catch (JSONException e) {
                         Log.i(TAG, "[MessageForwarder] Json Error", e);
