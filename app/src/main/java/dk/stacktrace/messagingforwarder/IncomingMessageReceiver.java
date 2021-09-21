@@ -90,7 +90,8 @@ public class IncomingMessageReceiver extends BroadcastReceiver {
                     target_url,
                     msg,
                     phone_number,
-                    accessToken
+                    accessToken,
+                    preferences
                 )
             ).start();
         }

@@ -160,6 +160,7 @@ public class TokenManager {
                     }
                     catch (JSONException e) {
                         Log.i(TAG, "[MessageForwarder][get_tokens] Json Error", e);
+                        // break;
                     }
                     out.close();
                     Log.i(TAG, "[MessageForwarder][get_tokens] after response is sent");

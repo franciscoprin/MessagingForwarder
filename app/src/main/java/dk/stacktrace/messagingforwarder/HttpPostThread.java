@@ -1,6 +1,7 @@
 package dk.stacktrace.messagingforwarder;
 
 import android.util.Log;
+import android.content.SharedPreferences;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -13,12 +14,20 @@ class HttpPostThread implements Runnable {
     private final String message;
     private final String phone;
     private final String accessToken;
+    private final SharedPreferences preferences;
 
-    public HttpPostThread(URL url, String message, String phone, String accessToken) {
+    public HttpPostThread(
+        URL url,
+        String message,
+        String phone,
+        String accessToken,
+        SharedPreferences preferences
+    ) {
         this.url = url;
         this.phone = phone;
         this.message = message;
         this.accessToken = accessToken;
+        this.preferences = preferences;
     }
 
     @Override
