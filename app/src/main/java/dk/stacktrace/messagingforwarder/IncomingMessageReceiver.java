@@ -44,15 +44,7 @@ public class IncomingMessageReceiver extends BroadcastReceiver {
         // }
 
         // Getting shared variables:
-        String accessToken = null;
-        String refreshToken = null;
-        String newRefreshToken = null;
-        TokenManager tokenManager = null;
-        String[] arg = new String[2];
         String msg = null;
-        String username = preferences.getString("service_username", null);
-        String password = preferences.getString("service_password", null);
-        String baseURL = preferences.getString("target_URL", "");
         String phone_number = preferences.getString("phone_number", "");
 
         // Setting ulr:
@@ -66,23 +58,6 @@ public class IncomingMessageReceiver extends BroadcastReceiver {
 
         SmsMessage[] messages = Telephony.Sms.Intents.getMessagesFromIntent(intent);
         for (SmsMessage message : messages) {
-            // Getting token:
-            refreshToken = preferences.getString("refresh_token", null);
-            tokenManager = new TokenManager(
-                baseURL,
-                username,
-                password,
-                refreshToken
-            );
-            arg = tokenManager.get_tokens();
-            newRefreshToken = arg[0];
-            accessToken = arg[1];
-
-            // Updating refresh token:
-            if(newRefreshToken != refreshToken){
-                preferences.edit().putString("refresh_token", newRefreshToken).apply();
-            }
-
             // Sending sms:
             msg = message.getDisplayMessageBody();
             new Thread(
@@ -90,7 +65,6 @@ public class IncomingMessageReceiver extends BroadcastReceiver {
                     target_url,
                     msg,
                     phone_number,
-                    accessToken,
                     preferences
                 )
             ).start();
