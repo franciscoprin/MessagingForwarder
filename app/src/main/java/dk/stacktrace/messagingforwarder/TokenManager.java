@@ -99,6 +99,7 @@ public class TokenManager {
             }
             catch (Exception e) {
                 Log.i(TAG, "[MessageForwarder][refresh_token] generic error", e);
+                e.printStackTrace(System.out);
             }
         }
         catch (IOException e) {
@@ -165,6 +166,7 @@ public class TokenManager {
                 }
                 catch (Exception e) {
                     Log.i(TAG, "[MessageForwarder][get_tokens] generic error", e);
+                    e.printStackTrace(System.out);
                 }
             }
             catch (IOException e) {
