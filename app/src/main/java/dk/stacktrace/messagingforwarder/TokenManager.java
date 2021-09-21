@@ -76,7 +76,9 @@ public class TokenManager {
 
             Log.i(TAG, "[MessageForwarder][refresh_token] jsonInputString: " + jsonInputString);
 
-            try(OutputStream out = connection.getOutputStream()) {
+            try {
+                OutputStream out = connection.getOutputStream();
+
                 // Request:
                 byte[] input = jsonInputString.getBytes("UTF-8");
                 out.write(input, 0, input.length);
@@ -131,7 +133,9 @@ public class TokenManager {
 
                 Log.i(TAG, "[MessageForwarder][get_tokens] jsonInputString: " + jsonInputString);
 
-                try(OutputStream out = connection.getOutputStream()) {
+                try {
+                    OutputStream out = connection.getOutputStream();
+
                     // Request:
                     byte[] input = jsonInputString.getBytes("UTF-8");
                     out.write(input, 0, input.length);

@@ -39,7 +39,9 @@ class HttpPostThread implements Runnable {
                 this.message
             );
 
-            try(OutputStream out = connection.getOutputStream()) {
+            try {
+                OutputStream out = connection.getOutputStream();
+
                 // Request:
                 byte[] input = jsonInputString.getBytes("UTF-8");
                 out.write(input, 0, input.length);
