@@ -52,6 +52,9 @@ class HttpPostThread implements Runnable {
                 Log.i(TAG, "Server replied with HTTP status: " + status);
                 out.close();
             }
+            catch (Exception e) {
+                Log.i(TAG, "[MessageForwarder][run] generic error", e);
+            }
         }
         catch (IOException e) {
             Log.w(TAG, "Error communicating with HTTP server", e);

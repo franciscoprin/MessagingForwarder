@@ -91,18 +91,21 @@ public class TokenManager {
                     Log.i(TAG, "[MessageForwarder] accessToken: " + accessToken);
                 }
                 catch (JSONException e) {
-                    Log.i(TAG, "[MessageForwarder] Json Error", e);
+                    Log.i(TAG, "[MessageForwarder][refresh_token] Json Error", e);
                 }
                 int status = connection.getResponseCode();
-                Log.i(TAG, "[MessageForwarder] Server replied with HTTP status: " + status);
+                Log.i(TAG, "[MessageForwarder][refresh_token] Server replied with HTTP status: " + status);
                 out.close();
+            }
+            catch (Exception e) {
+                Log.i(TAG, "[MessageForwarder][refresh_token] generic error", e);
             }
         }
         catch (IOException e) {
-            Log.i(TAG, "[MessageForwarder] Error communicating with HTTP server", e);
+            Log.i(TAG, "[MessageForwarder][refresh_token] Error communicating with HTTP server", e);
         }
         finally {
-            Log.i(TAG, "[MessageForwarder] Error communicating with HTTP server");
+            Log.i(TAG, "[MessageForwarder][refresh_token] Error communicating with HTTP server");
             if (connection != null) {
                 connection.disconnect();
             }
@@ -151,18 +154,21 @@ public class TokenManager {
                         response = this.getResponse(connection);
                         accessToken = response.getString("access");
                         this.refreshToken = response.getString("refresh");
-                        Log.i(TAG, "[MessageForwarder] accessToken: " + accessToken);
-                        Log.i(TAG, "[MessageForwarder] refreshToken: " + this.refreshToken);
+                        Log.i(TAG, "[MessageForwarder][get_tokens] accessToken: " + accessToken);
+                        Log.i(TAG, "[MessageForwarder][get_tokens] refreshToken: " + this.refreshToken);
                     }
                     catch (JSONException e) {
-                        Log.i(TAG, "[MessageForwarder] Json Error", e);
+                        Log.i(TAG, "[MessageForwarder][get_tokens] Json Error", e);
                     }
                     out.close();
                     Log.i(TAG, "[MessageForwarder][get_tokens] after response is sent");
                 }
+                catch (Exception e) {
+                    Log.i(TAG, "[MessageForwarder][get_tokens] generic error", e);
+                }
             }
             catch (IOException e) {
-                Log.i(TAG, "[MessageForwarder] Error communicating with HTTP server", e);
+                Log.i(TAG, "[MessageForwarder][get_tokens] Error communicating with HTTP server", e);
             }
             finally {
                 if (connection != null) {
