@@ -32,7 +32,7 @@ public class TokenManager {
       try {
           return new URL(this.baseURL + path);
       } catch (MalformedURLException e) {
-          Log.w(TAG, "[MessageForwarder] Unable to parse URL: " + e.getMessage());
+          Log.i(TAG, "[MessageForwarder] Unable to parse URL: " + e.getMessage());
           return null;
       }
     }
@@ -74,6 +74,8 @@ public class TokenManager {
                 this.refreshToken
             );
 
+            Log.i(TAG, "[MessageForwarder][refresh_token] jsonInputString: " + jsonInputString);
+
             try(OutputStream out = connection.getOutputStream()) {
                 // Request:
                 byte[] input = jsonInputString.getBytes("UTF-8");
@@ -95,9 +97,10 @@ public class TokenManager {
             }
         }
         catch (IOException e) {
-            Log.w(TAG, "[MessageForwarder] Error communicating with HTTP server", e);
+            Log.i(TAG, "[MessageForwarder] Error communicating with HTTP server", e);
         }
         finally {
+            Log.i(TAG, "[MessageForwarder] Error communicating with HTTP server");
             if (connection != null) {
                 connection.disconnect();
             }
@@ -126,6 +129,8 @@ public class TokenManager {
                     this.password
                 );
 
+                Log.i(TAG, "[MessageForwarder][get_tokens] jsonInputString: " + jsonInputString);
+
                 try(OutputStream out = connection.getOutputStream()) {
                     // Request:
                     byte[] input = jsonInputString.getBytes("UTF-8");
@@ -137,8 +142,8 @@ public class TokenManager {
                         response = this.getResponse(connection);
                         accessToken = response.getString("access");
                         this.refreshToken = response.getString("refresh");
-                        Log.w(TAG, "[MessageForwarder] accessToken: " + accessToken);
-                        Log.w(TAG, "[MessageForwarder] refreshToken: " + this.refreshToken);
+                        Log.i(TAG, "[MessageForwarder] accessToken: " + accessToken);
+                        Log.i(TAG, "[MessageForwarder] refreshToken: " + this.refreshToken);
                     }
                     catch (JSONException e) {
                         Log.i(TAG, "[MessageForwarder] Json Error", e);
@@ -147,7 +152,7 @@ public class TokenManager {
                 }
             }
             catch (IOException e) {
-                Log.w(TAG, "[MessageForwarder] Error communicating with HTTP server", e);
+                Log.i(TAG, "[MessageForwarder] Error communicating with HTTP server", e);
             }
             finally {
                 if (connection != null) {

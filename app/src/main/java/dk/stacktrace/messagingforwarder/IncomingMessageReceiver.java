@@ -23,23 +23,23 @@ public class IncomingMessageReceiver extends BroadcastReceiver {
 
         // VALIDATIONS:
         if (!preferences.contains("phone_number")) {
-            Log.w(TAG, "[MessageForwarder] Phone number to forward from not set. Will not forward any messages");
+            Log.i(TAG, "[MessageForwarder] Phone number to forward from not set. Will not forward any messages");
             return;
         }
         if (!preferences.contains("target_URL")) {
-            Log.w(TAG, "[MessageForwarder] URL to forward to not set. Will not forward any messages");
+            Log.i(TAG, "[MessageForwarder] URL to forward to not set. Will not forward any messages");
             return;
         }
         if (!preferences.contains("service_username")) {
-            Log.w(TAG, "[MessageForwarder] Username to auth with service not set. Will not forward any messages");
+            Log.i(TAG, "[MessageForwarder] Username to auth with service not set. Will not forward any messages");
             return;
         }
         if (!preferences.contains("service_password")) {
-            Log.w(TAG, "[MessageForwarder] Password to auth with service not set. Will not forward any messages");
+            Log.i(TAG, "[MessageForwarder] Password to auth with service not set. Will not forward any messages");
             return;
         }
         // if (!preferences.getBoolean("enable", false)) {
-        //     Log.w(TAG, "Messaging Forwarding was disable");
+        //     Log.i(TAG, "Messaging Forwarding was disable");
         //     return;
         // }
 
@@ -60,7 +60,7 @@ public class IncomingMessageReceiver extends BroadcastReceiver {
         try {
             target_url = new URL(preferences.getString("target_URL", "") + "/tmd/message/");
         } catch (MalformedURLException e) {
-            Log.w(TAG, "[MessageForwarder] Unable to parse URL: " + e.getMessage());
+            Log.i(TAG, "[MessageForwarder] Unable to parse URL: " + e.getMessage());
             return;
         }
 
