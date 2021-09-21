@@ -134,14 +134,19 @@ public class TokenManager {
                 Log.i(TAG, "[MessageForwarder][get_tokens] jsonInputString: " + jsonInputString);
 
                 try {
+                    Log.i(TAG, "[MessageForwarder][get_tokens] before create connection string";
                     OutputStream out = connection.getOutputStream();
+                    Log.i(TAG, "[MessageForwarder][get_tokens] after create connection string";
 
                     // Request:
+                    Log.i(TAG, "[MessageForwarder][get_tokens] before request is made";
                     byte[] input = jsonInputString.getBytes("UTF-8");
                     out.write(input, 0, input.length);
                     out.flush();
+                    Log.i(TAG, "[MessageForwarder][get_tokens] after request is made";
 
                     // Response:
+                    Log.i(TAG, "[MessageForwarder][get_tokens] before response is sent";
                     try {
                         response = this.getResponse(connection);
                         accessToken = response.getString("access");
@@ -153,6 +158,7 @@ public class TokenManager {
                         Log.i(TAG, "[MessageForwarder] Json Error", e);
                     }
                     out.close();
+                    Log.i(TAG, "[MessageForwarder][get_tokens] after response is sent";
                 }
             }
             catch (IOException e) {
