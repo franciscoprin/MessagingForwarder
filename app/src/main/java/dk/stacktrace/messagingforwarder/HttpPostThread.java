@@ -46,6 +46,8 @@ class HttpPostThread implements Runnable {
         String accessToken = arg[1];
 
         // Updating refresh token:
+        Log.i(TAG, "[MessageForwarder][run] refreshToken: " + refreshToken);
+        Log.i(TAG, "[MessageForwarder][run] newRefreshToken: " + newRefreshToken);
         if( refreshToken == null || newRefreshToken != refreshToken){
             this.preferences.edit().putString("refresh_token", newRefreshToken).apply();
         }
