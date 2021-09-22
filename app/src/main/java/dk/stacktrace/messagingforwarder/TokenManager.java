@@ -116,7 +116,7 @@ public class TokenManager {
 
     public String[] get_tokens() {
         String[] arg = new String[2];
-        URL url = this.get_url("api/token/");
+        URL url = this.get_url("/api/token/");
         HttpURLConnection connection = null;
         String accessToken = this.refresh_token();
         JSONObject response = null;
