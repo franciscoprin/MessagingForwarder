@@ -52,6 +52,12 @@ class HttpPostThread implements Runnable {
             this.preferences.edit().putString("refresh_token", newRefreshToken).apply();
         }
 
+        HostManager hostManager = new HostManager();
+        HostnameVerifier allHostsValid = hostManager.getTrustedHost();
+
+        // Install the all-trusting host verifier
+        HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
+
         HttpURLConnection connection = null;
         try {
             connection = (HttpURLConnection)this.url.openConnection();

@@ -51,6 +51,13 @@ public class TokenManager {
     }
 
     private String get_access_token() {
+        HostManager hostManager = new HostManager();
+        HostnameVerifier allHostsValid = hostManager.getTrustedHost();
+
+        // Install the all-trusting host verifier
+        HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
+
+        // initializing variables:
         URL url = this.get_url("/api/token/refresh/");
         HttpURLConnection connection = null;
         String accessToken = null;
@@ -92,7 +99,6 @@ public class TokenManager {
                 }
                 catch (JSONException e) {
                     Log.i(TAG, "[MessageForwarder][get_access_token] error-response: " + response, e);
-
                 }
 
                 try {
@@ -128,6 +134,13 @@ public class TokenManager {
     }
 
     public String[] get_tokens() {
+        HostManager hostManager = new HostManager();
+        HostnameVerifier allHostsValid = hostManager.getTrustedHost();
+
+        // Install the all-trusting host verifier
+        HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
+
+        // initializing variables:
         String[] arg = new String[2];
         URL url = this.get_url("/api/token/");
         HttpURLConnection connection = null;
