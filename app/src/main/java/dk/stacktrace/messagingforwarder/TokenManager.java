@@ -13,6 +13,7 @@ import org.json.JSONException;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import javax.net.ssl.HostnameVerifier;
 
 public class TokenManager {
     private static final String TAG = HttpPostThread.class.getName();
