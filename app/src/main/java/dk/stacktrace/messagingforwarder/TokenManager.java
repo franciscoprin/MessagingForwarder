@@ -87,12 +87,11 @@ public class TokenManager {
                 String code = null;
                 try {
                     response = this.getResponse(connection);
-                    int status = connection.getResponseCode();
                     accessToken = response.getString("access");
                     Log.i(TAG, "[MessageForwarder] response: " + response);
                 }
                 catch (JSONException e) {
-                    Log.i(TAG, "[MessageForwarder][get_access_token] error-response: ", response);
+                    Log.i(TAG, "[MessageForwarder][get_access_token] error-response: " + response, e);
 
                 }
 
@@ -103,6 +102,7 @@ public class TokenManager {
                 }
 
                 // The refresh token expired.
+                int status = connection.getResponseCode();
                 if (status == 401 && code == "token_not_valid") {
                     return null;
                 }
