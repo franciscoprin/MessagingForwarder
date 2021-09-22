@@ -12,7 +12,7 @@ import javax.net.ssl.X509TrustManager;
 import java.security.cert.X509Certificate;
 
 
-public class HostManager() {
+public class HostManager {
 
     public HostnameVerifier getTrustedHost(){
         // Create a trust manager that does not validate certificate chains
