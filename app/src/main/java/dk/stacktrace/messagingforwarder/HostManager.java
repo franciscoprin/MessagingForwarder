@@ -1,3 +1,5 @@
+import android.util.Log;
+
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
@@ -13,7 +15,7 @@ import java.security.cert.X509Certificate;
 
 
 public class HostManager {
-    private static final String TAG = HttpPostThread.class.getName();
+    private static final String TAG = HostManager.class.getName();
 
     public HostManager() {}
 
