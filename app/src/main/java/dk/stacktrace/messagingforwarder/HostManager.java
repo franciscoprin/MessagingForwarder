@@ -13,6 +13,8 @@ import java.security.cert.X509Certificate;
 
 
 public class HostManager {
+    private static final String TAG = HttpPostThread.class.getName();
+
     public HostManager() {}
 
     public HostnameVerifier getTrustedHost(){
