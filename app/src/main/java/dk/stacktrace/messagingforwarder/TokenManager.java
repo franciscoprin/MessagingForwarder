@@ -50,8 +50,7 @@ public class TokenManager {
         return new JSONObject(builder.toString());
     }
 
-
-    private String refresh_token() {
+    private String get_access_token() {
         URL url = this.get_url("/api/token/refresh/");
         HttpURLConnection connection = null;
         String accessToken = null;
@@ -74,7 +73,7 @@ public class TokenManager {
                 this.refreshToken
             );
 
-            Log.i(TAG, "[MessageForwarder][refresh_token] jsonInputString: " + jsonInputString);
+            Log.i(TAG, "[MessageForwarder][get_access_token] jsonInputString: " + jsonInputString);
 
             try {
                 OutputStream out = connection.getOutputStream();
@@ -85,28 +84,42 @@ public class TokenManager {
                 out.flush();
 
                 // Response:
+                String code = null;
                 try {
                     response = this.getResponse(connection);
+                    int status = connection.getResponseCode();
                     accessToken = response.getString("access");
-                    Log.i(TAG, "[MessageForwarder] accessToken: " + accessToken);
+                    Log.i(TAG, "[MessageForwarder] response: " + response);
                 }
                 catch (JSONException e) {
-                    Log.i(TAG, "[MessageForwarder][refresh_token] Json Error", e);
+                    Log.i(TAG, "[MessageForwarder][get_access_token] error-response: ", response);
+
                 }
-                int status = connection.getResponseCode();
-                Log.i(TAG, "[MessageForwarder][refresh_token] Server replied with HTTP status: " + status);
+
+                try {
+                    code = response.getString("token_not_valid");
+                }
+                catch (JSONException e) {
+                }
+
+                // The refresh token expired.
+                if (status == 401 && code == "token_not_valid") {
+                    return null;
+                }
+
+                Log.i(TAG, "[MessageForwarder][get_access_token] Server replied with HTTP status: " + status);
                 out.close();
             }
             catch (Exception e) {
-                Log.i(TAG, "[MessageForwarder][refresh_token] generic error", e);
+                Log.i(TAG, "[MessageForwarder][get_access_token] generic error", e);
                 e.printStackTrace(System.out);
             }
         }
         catch (IOException e) {
-            Log.i(TAG, "[MessageForwarder][refresh_token] Error communicating with HTTP server", e);
+            Log.i(TAG, "[MessageForwarder][get_access_token] Error communicating with HTTP server", e);
         }
         finally {
-            Log.i(TAG, "[MessageForwarder][refresh_token] Error communicating with HTTP server");
+            Log.i(TAG, "[MessageForwarder][get_access_token] Error communicating with HTTP server");
             if (connection != null) {
                 connection.disconnect();
             }
@@ -118,8 +131,10 @@ public class TokenManager {
         String[] arg = new String[2];
         URL url = this.get_url("/api/token/");
         HttpURLConnection connection = null;
-        String accessToken = this.refresh_token();
+        String accessToken = null;
         JSONObject response = null;
+
+        accessToken = this.get_access_token();
         while (accessToken == null) {
             try {
                 connection = (HttpURLConnection)url.openConnection();
