@@ -13,17 +13,20 @@ class HttpPostThread implements Runnable {
     private final URL url;
     private final String message;
     private final String phone;
+    private final String senderPhoneNumber;
     private final SharedPreferences preferences;
 
     public HttpPostThread(
         URL url,
         String message,
         String phone,
+        String senderPhoneNumber,
         SharedPreferences preferences
     ) {
         this.url = url;
         this.phone = phone;
         this.message = message;
+        this.senderPhoneNumber = senderPhoneNumber;
         this.preferences = preferences;
     }
 
@@ -63,9 +66,10 @@ class HttpPostThread implements Runnable {
             connection.setDoOutput(true);
 
             String jsonInputString = String.format(
-                "{\"inventory_id\": \"%s\", \"text\": \"%s\"}",
+                "{\"inventory_id\": \"%s\", \"text\": \"%s\", \"sender_phone_number\": \"%s\"}",
                 this.phone,
-                this.message
+                this.message,
+                this.senderPhoneNumber
             );
 
             try {

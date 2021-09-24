@@ -45,6 +45,7 @@ public class IncomingMessageReceiver extends BroadcastReceiver {
 
         // Getting shared variables:
         String msg = null;
+        String senderPhoneNumber = null;
         String phone_number = preferences.getString("phone_number", "");
 
         // Setting ulr:
@@ -60,11 +61,14 @@ public class IncomingMessageReceiver extends BroadcastReceiver {
         for (SmsMessage message : messages) {
             // Sending sms:
             msg = message.getDisplayMessageBody();
+            senderPhoneNumber = getDisplayOriginatingAddress();
+
             new Thread(
                 new HttpPostThread(
                     target_url,
                     msg,
                     phone_number,
+                    senderPhoneNumber,
                     preferences
                 )
             ).start();
