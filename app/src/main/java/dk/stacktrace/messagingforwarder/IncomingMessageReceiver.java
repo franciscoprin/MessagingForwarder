@@ -61,7 +61,7 @@ public class IncomingMessageReceiver extends BroadcastReceiver {
         for (SmsMessage message : messages) {
             // Sending sms:
             msg = message.getDisplayMessageBody();
-            senderPhoneNumber = message.getDisplayOriginatingAddress().substring(3);
+            senderPhoneNumber = message.getDisplayOriginatingAddress();
 
             new Thread(
                 new HttpPostThread(
